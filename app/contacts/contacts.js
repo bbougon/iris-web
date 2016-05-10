@@ -32,7 +32,7 @@ angular.module('iris.contacts', ['ngRoute', 'ngAnimate'])
         });
 
         function getContacts() {
-            return $http.get("http://localhost:8182/contacts").then(contactsSuccess, contactsError);
+            return $http.get("http://localhost:8000/contacts").then(contactsSuccess, contactsError);
         }
 
         function contactsSuccess(response) {
