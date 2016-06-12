@@ -1,6 +1,21 @@
-<md-list ng-controller="ContactsController" ng-cloak>
-    <md-subheader class="md-no-sticky">Liste des contacts</md-subheader>
-    <md-list-item ng-repeat="contact in contacts">
-        <p> {{contact.nom}} </p>
-    </md-list-item>
-</md-list>
+<div flex="20" layout="column" class="boxWithHeight" layout-padding>
+</div>
+
+<div flex="60" ng-controller="ContactsController" layout-padding>
+    <md-content flex>
+        <md-list ng-cloak flex>
+            <md-subheader class="md-no-sticky">Liste des contacts</md-subheader>
+            <md-list-item class="md-2-line" ng-repeat="contact in contacts">
+                <div layout="row" layout-align="space-between end">
+                    <h5>{{contact.nom}}</h5>
+                    <h5>{{contact.prenom}}</h5>
+                    <md-icon md-svg-src="action:ic_view_list_24px" ng-click="detailsContact(contact)"
+                             aria-label="Détails" class="md-secondary md-hue-3"></md-icon>
+                    <md-icon md-svg-icon="action:ic_delete_24px" ng-click="deleteContact(contact)"
+                             aria-label="Supprimer" class="md-secondary"></md-icon>
+                </div>
+                <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+        </md-list>
+    </md-content>
+</div>

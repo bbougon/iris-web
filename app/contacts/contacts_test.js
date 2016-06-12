@@ -20,11 +20,11 @@ describe('iris.contacts module', function () {
 
     describe('contact services', function () {
         it('devrait appeler la ressource des contacts et les charger', inject(function ($httpBackend, $http, $controller) {
-            var donneeAttendue = angular.toJson('[{"nom":"Bertrand"}, {"nom":"Aline"}, {"nom":"Alessandra"}, {"nom":"Rafael"}]');
-            $httpBackend.expectGET('http://localhost:8000/contacts').respond(donneeAttendue);
+            var donneeAttendue = angular.toJson('[{"nom":"Bougon", "prénom":"Bertrand"}, {"nom":"Aline"}, {"nom":"Alessandra"}, {"nom":"Rafael"}]');
+            $httpBackend.when('GET', 'http://localhost:8182/contacts').respond(donneeAttendue);
             var $scope = {};
-            $controller('ContactsController', {$scope: $scope, contactsService: service});
 
+            $controller('ContactsController', {$scope: $scope, contactsService: service});
             $httpBackend.flush();
 
             expect($scope.contacts).not.toBeNull();
@@ -33,10 +33,10 @@ describe('iris.contacts module', function () {
 
         it('devrait retourner un message d\'erreur lorsque la ressource des contacts renvoit une erreur', inject(function ($httpBackend, $http, $controller) {
             var erreurAttendue = "Une erreur a eu lieu lors de la récupération des contacts.";
-            $httpBackend.expectGET('http://localhost:8000/contacts').respond(400, erreurAttendue);
+            $httpBackend.expectGET('http://localhost:8182/contacts').respond(400, erreurAttendue);
             var $scope = {};
-            $controller('ContactsController', {$scope: $scope, contactsService: service});
 
+            $controller('ContactsController', {$scope: $scope, contactsService: service});
             $httpBackend.flush();
 
             expect($scope.contacts).toEqual([]);

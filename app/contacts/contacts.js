@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('iris.contacts', ['ngRoute', 'ngAnimate'])
+angular.module('iris.contacts', ['ngRoute', 'ngAnimate', 'ngMessages'])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/contacts', {
@@ -9,9 +9,9 @@ angular.module('iris.contacts', ['ngRoute', 'ngAnimate'])
         });
     }])
 
-    .controller('ContactsController', ['$scope', 'contactService', function ($scope, contactService) {
+    .controller('ContactsController', ['$scope', '$mdDialog', 'contactService', function ($scope, $mdDialog, contactService) {
         $scope.contacts = [];
-        $scope.error = '';
+        $scope.error;
 
         $scope.getContacts = function () {
             contactService.getContacts()
@@ -23,16 +23,46 @@ angular.module('iris.contacts', ['ngRoute', 'ngAnimate'])
                 });
         }
 
+        $scope.deleteContact = function (contact) {
+            var confirm = $mdDialog.confirm()
+                .title('Suppression de ' + contact.nom + ' ' + contact.prenom)
+                .textContent('Voulez-vous vraiment supprimer ce contact?')
+                .ariaLabel('Suppression de compte')
+                .ok('Oui')
+                .cancel('Non')
+                .closeTo({
+                    left: 1500
+                });
+
+            $mdDialog
+                .show(confirm)
+                .then(function () {
+                    contactService.deleteContact(contact)
+                        .then(function (data) {
+                            $scope.contacts.splice($scope.contacts.indexOf(contact), 1);
+                        })
+                        .catch(function (data) {
+                            $scope.error = data;
+                        });
+                });
+
+        }
+
         $scope.getContacts();
     }])
 
     .service('contactService', function ($http, $q) {
         return ({
-            getContacts: getContacts
+            getContacts: getContacts,
+            deleteContact: deleteContact
         });
 
+        function deleteContact(contact) {
+            return $http.delete("http://localhost:8182/contacts/" + contact.identifiant).then(contactsSuccess, contactsError);
+        }
+
         function getContacts() {
-            return $http.get("http://localhost:8000/contacts").then(contactsSuccess, contactsError);
+            return $http.get("http://localhost:8182/contacts").then(contactsSuccess, contactsError);
         }
 
         function contactsSuccess(response) {
