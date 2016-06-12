@@ -9,7 +9,7 @@ angular.module('iris.contacts', ['ngRoute', 'ngAnimate', 'ngMaterial'])
         });
     }])
 
-    .controller('ContactsController', ['$scope', '$mdDialog', 'contactService', function ($scope, $mdDialog, contactService) {
+    .controller('ContactsController', ['$scope', '$mdDialog', 'uuid', 'contactService', function ($scope, $mdDialog, uuid, contactService) {
         $scope.contacts = [];
         $scope.error;
 
@@ -38,7 +38,7 @@ angular.module('iris.contacts', ['ngRoute', 'ngAnimate', 'ngMaterial'])
                 .show(confirm)
                 .then(function () {
                     contactService.deleteContact(contact)
-                        .then(function (data) {
+                        .then(function () {
                             $scope.contacts.splice($scope.contacts.indexOf(contact), 1);
                         })
                         .catch(function (data) {
@@ -47,6 +47,18 @@ angular.module('iris.contacts', ['ngRoute', 'ngAnimate', 'ngMaterial'])
                 });
 
         }
+        
+        $scope.enregistrer = function (contact) {
+            contact.identifiant = uuid.v4();
+            contactService.createContact(contact)
+                .then(function () {
+                    $scope.contacts.push(contact);
+                })
+                .catch(function (data) {
+                    alert(data);
+                    $scope.error = data;
+                });
+        }
 
         $scope.getContacts();
     }])
@@ -54,7 +66,8 @@ angular.module('iris.contacts', ['ngRoute', 'ngAnimate', 'ngMaterial'])
     .service('contactService', function ($http, $q) {
         return ({
             getContacts: getContacts,
-            deleteContact: deleteContact
+            deleteContact: deleteContact,
+            createContact: createContact
         });
 
         function deleteContact(contact) {
@@ -63,6 +76,10 @@ angular.module('iris.contacts', ['ngRoute', 'ngAnimate', 'ngMaterial'])
 
         function getContacts() {
             return $http.get("http://localhost:8182/contacts").then(contactsSuccess, contactsError);
+        }
+
+        function createContact(contact) {
+            return $http.put("http://localhost:8182/contacts/" + contact.identifiant, contact).then(contactsSuccess, contactsError);
         }
 
         function contactsSuccess(response) {

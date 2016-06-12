@@ -2,6 +2,50 @@
 </div>
 
 <div flex="60" ng-controller="ContactsController" layout-padding>
+    <md-content>
+        <md-icon md-svg-src="content:ic_add_box_24px" ng-click="showForm=true"
+                 aria-label="Ajouter un contact" class="md-secondary md-hue-3"></md-icon>
+    </md-content>
+    <md-content ng-show="showForm">
+        <div>
+            <form name="contactForm">
+                <div layout-gt-sm="column">
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <input ng-model="contact.nom" placeholder="Nom">
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <input ng-model="contact.prenom" placeholder="Prénom">
+                        </md-input-container>
+                    </div>
+
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <input ng-model="contact.entreprise" placeholder="Entreprise">
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <input ng-model="contact.fonction" placeholder="Fonction">
+                        </md-input-container>
+                    </div>
+
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <md-icon md-svg-src="communication:ic_email_24px" class="email"></md-icon>
+                            <input ng-model="contact.email" type="email" placeholder="Email">
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <md-icon md-svg-src="communication:ic_phone_24px"></md-icon>
+                            <input ng-model="contact.telephone" placeholder="Téléphone">
+                        </md-input-container>
+                    </div>
+
+                    <div layout-gt-sm="row" layout-align="end">
+                        <md-button class="md-raised md-primary" ng-click="enregistrer(contact)">Enregistrer</md-button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </md-content>
     <md-content flex>
         <md-list ng-cloak flex>
             <md-subheader class="md-no-sticky">Liste des contacts</md-subheader>
