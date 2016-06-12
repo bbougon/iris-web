@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('iris.contacts', ['ngRoute', 'ngAnimate', 'ngMessages'])
+angular.module('iris.contacts', ['ngRoute', 'ngAnimate', 'ngMaterial'])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/contacts', {

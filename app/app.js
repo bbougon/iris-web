@@ -3,7 +3,6 @@
 // Declare app level module which depends on views, and components
 angular.module('iris', [
         'ngRoute',
-        'ngMaterial',
         'iris.contacts',
         'iris.version'
     ])
