@@ -4,8 +4,8 @@
 angular.module('iris', [
         'ngRoute',
         'iris.contacts',
-        'iris.version',
-        'angular-uuid'
+        'iris.version'
+
     ])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.otherwise({redirectTo: '/contacts'});

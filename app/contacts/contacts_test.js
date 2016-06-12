@@ -2,7 +2,7 @@
 
 describe('iris.contacts module', function () {
 
-    var mock, service, q;
+    var mock, service;
 
     beforeEach(module('iris.contacts'));
 
@@ -15,10 +15,6 @@ describe('iris.contacts module', function () {
 
         inject(function ($injector) {
             service = $injector.get('contactService');
-        });
-
-        inject(function($q) {
-            q = $q;
         });
     });
 
