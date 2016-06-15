@@ -46,10 +46,20 @@
             </form>
         </div>
     </md-content>
+    <md-content ng-show="error">
+        <div class="alert alert-danger">
+            <p>{{error}}</p>
+        </div>
+    </md-content>
+    <md-content ng-show="success">
+        <div class="alert alert-success">
+            <p>{{success}}</p>
+        </div>
+    </md-content>
     <md-content flex>
         <md-list ng-cloak flex>
             <md-subheader class="md-no-sticky">Liste des contacts</md-subheader>
-            <md-list-item class="md-2-line" ng-repeat="contact in contacts">
+            <md-list-item class="md-2-line" ng-repeat="contact in contacts track by $index">
                 <div layout="row" layout-align="space-between end">
                     <h5>{{contact.nom}}</h5>
                     <h5>{{contact.prenom}}</h5>

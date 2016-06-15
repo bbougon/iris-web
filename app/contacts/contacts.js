@@ -9,14 +9,17 @@ angular.module('iris.contacts', ['ngRoute', 'ngAnimate', 'ngMaterial', 'angular-
         });
     }])
 
-    .controller('ContactsController', ['$scope', '$mdDialog', 'uuid', 'contactService', function ($scope, $mdDialog, uuid, contactService) {
+
+    .controller('ContactsController', ['$scope', '$mdDialog', '$timeout', 'uuid', 'contactService', function ($scope, $mdDialog, $timeout, uuid, contactService) {
         $scope.contacts = [];
+        $scope.showForm = false;
         $scope.error;
+        $scope.success;
 
         $scope.getContacts = function () {
             contactService.getContacts()
                 .then(function (data) {
-                    $scope.contacts = data;
+                    $scope.contacts = angular.fromJson(data);
                 })
                 .catch(function (data) {
                     $scope.error = data;
@@ -40,6 +43,10 @@ angular.module('iris.contacts', ['ngRoute', 'ngAnimate', 'ngMaterial', 'angular-
                     contactService.deleteContact(contact)
                         .then(function () {
                             $scope.contacts.splice($scope.contacts.indexOf(contact), 1);
+                            $scope.success = "Suppression de " + contact.nom + " " + contact.prenom + " effectuée.";
+                            $timeout(function () {
+                                $scope.success = false;
+                            }, 4000);
                         })
                         .catch(function (data) {
                             $scope.error = data;
@@ -47,22 +54,26 @@ angular.module('iris.contacts', ['ngRoute', 'ngAnimate', 'ngMaterial', 'angular-
                 });
 
         }
-        
+
         $scope.enregistrer = function (contact) {
             contact.identifiant = uuid.v4();
             contactService.createContact(contact)
                 .then(function () {
+                    console.log($scope);
                     $scope.contacts.push(contact);
+                    $scope.showForm = false;
+                    $scope.success = "Ajout de " + contact.nom + " " + contact.prenom + " effectué.";
+                    $timeout(function () {
+                        $scope.success = false;
+                    }, 4000);
                 })
                 .catch(function (data) {
-                    alert(data);
                     $scope.error = data;
                 });
         }
 
         $scope.getContacts();
     }])
-
     .service('contactService', function ($http, $q) {
         return ({
             getContacts: getContacts,

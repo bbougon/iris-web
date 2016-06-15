@@ -43,3 +43,32 @@ section[flex="100"] {
 .iris-menu {
     color: white;
 }
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
+.alert-success.ng-show {
+    transition:0.5s linear all;
+    opacity:1;
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+.alert-danger.ng-show {
+    transition:0.5s linear all;
+    opacity:1;
+}
