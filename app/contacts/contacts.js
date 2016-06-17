@@ -10,11 +10,30 @@ angular.module('iris.contacts', ['ngRoute', 'ngAnimate', 'ngMaterial', 'angular-
     }])
 
 
-    .controller('ContactsController', ['$scope', '$mdDialog', '$timeout', 'uuid', 'contactService', function ($scope, $mdDialog, $timeout, uuid, contactService) {
+    .controller('ContactsController', ['$scope', '$mdDialog', '$timeout', '$mdMedia', 'uuid', 'contactService', function ($scope, $mdDialog, $timeout, $mdMedia, uuid, contactService) {
         $scope.contacts = [];
-        $scope.showForm = false;
-        $scope.error;
-        $scope.success;
+
+
+        $scope.formulaireAjout = function () {
+            $mdDialog.show({
+                    controller: 'ContactsController',
+                    templateUrl: 'contacts/ajout-contact.tmpl.html',
+                    parent: angular.element(document.body),
+                    clickOutsideToClose: true,
+                    fullscreen: true
+                })
+                .then(function (contact) {
+                    $scope.contacts.push(contact);
+                    $scope.success = "Ajout de " + contact.nom + " " + contact.prenom + " effectué.";
+                    $timeout(function () {
+                        $scope.success = false;
+                    }, 4000);
+                });
+        };
+
+        $scope.annuler = function () {
+            $mdDialog.hide();
+        };
 
         $scope.getContacts = function () {
             contactService.getContacts()
@@ -24,9 +43,9 @@ angular.module('iris.contacts', ['ngRoute', 'ngAnimate', 'ngMaterial', 'angular-
                 .catch(function (data) {
                     $scope.error = data;
                 });
-        }
+        };
 
-        $scope.deleteContact = function (contact) {
+        $scope.supprimer = function (contact) {
             var confirm = $mdDialog.confirm()
                 .title('Suppression de ' + contact.nom + ' ' + contact.prenom)
                 .textContent('Voulez-vous vraiment supprimer ce contact?')
@@ -40,7 +59,7 @@ angular.module('iris.contacts', ['ngRoute', 'ngAnimate', 'ngMaterial', 'angular-
             $mdDialog
                 .show(confirm)
                 .then(function () {
-                    contactService.deleteContact(contact)
+                    contactService.supprimer(contact)
                         .then(function () {
                             $scope.contacts.splice($scope.contacts.indexOf(contact), 1);
                             $scope.success = "Suppression de " + contact.nom + " " + contact.prenom + " effectuée.";
@@ -53,19 +72,13 @@ angular.module('iris.contacts', ['ngRoute', 'ngAnimate', 'ngMaterial', 'angular-
                         });
                 });
 
-        }
+        };
 
         $scope.enregistrer = function (contact) {
             contact.identifiant = uuid.v4();
-            contactService.createContact(contact)
+            contactService.enregistrer(contact)
                 .then(function () {
-                    console.log($scope);
-                    $scope.contacts.push(contact);
-                    $scope.showForm = false;
-                    $scope.success = "Ajout de " + contact.nom + " " + contact.prenom + " effectué.";
-                    $timeout(function () {
-                        $scope.success = false;
-                    }, 4000);
+                    $mdDialog.hide(contact);
                 })
                 .catch(function (data) {
                     $scope.error = data;
@@ -77,11 +90,11 @@ angular.module('iris.contacts', ['ngRoute', 'ngAnimate', 'ngMaterial', 'angular-
     .service('contactService', function ($http, $q) {
         return ({
             getContacts: getContacts,
-            deleteContact: deleteContact,
-            createContact: createContact
+            supprimer: supprimer,
+            enregistrer: enregistrer
         });
 
-        function deleteContact(contact) {
+        function supprimer(contact) {
             return $http.delete("http://localhost:8182/contacts/" + contact.identifiant).then(contactsSuccess, contactsError);
         }
 
@@ -89,7 +102,7 @@ angular.module('iris.contacts', ['ngRoute', 'ngAnimate', 'ngMaterial', 'angular-
             return $http.get("http://localhost:8182/contacts").then(contactsSuccess, contactsError);
         }
 
-        function createContact(contact) {
+        function enregistrer(contact) {
             return $http.put("http://localhost:8182/contacts/" + contact.identifiant, contact).then(contactsSuccess, contactsError);
         }
 

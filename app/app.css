@@ -58,8 +58,8 @@ section[flex="100"] {
 }
 
 .alert-success.ng-show {
-    transition:0.5s linear all;
-    opacity:1;
+    transition: 0.5s linear all;
+    opacity: 1;
 }
 
 .alert-danger {
@@ -69,6 +69,14 @@ section[flex="100"] {
 }
 
 .alert-danger.ng-show {
-    transition:0.5s linear all;
-    opacity:1;
+    transition: 0.5s linear all;
+    opacity: 1;
+}
+
+.md-button.md-fab.iris-blue {
+    background-color: rgb(63, 81, 181);
+}
+
+.md-button.md-fab.iris-blue:not([disabled]):hover {
+    background-color: rgb(63, 81, 181);
 }

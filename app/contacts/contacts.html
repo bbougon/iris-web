@@ -1,58 +1,21 @@
 <div flex="20" layout="column" class="boxWithHeight" layout-padding>
 </div>
 
-<div flex="60" ng-controller="ContactsController" layout-padding>
+<div flex="75" ng-controller="ContactsController" layout-padding>
     <md-content>
-        <md-icon md-svg-src="content:ic_add_box_24px" ng-click="showForm=true"
-                 aria-label="Ajouter un contact" class="md-secondary md-hue-3"></md-icon>
+        <md-button class="md-fab md-mini iris-blue">
+            <md-tooltip md-direction="bottom">
+                Ajouter un contact
+            </md-tooltip>
+            <md-icon md-svg-src="content:ic_add_box_24px" ng-click="formulaireAjout()"
+                     aria-label="Ajouter un contact" class="md-secondary md-hue-3" ></md-icon>
+        </md-button>
     </md-content>
-    <md-content ng-show="showForm">
-        <div>
-            <form name="contactForm">
-                <div layout-gt-sm="column">
-                    <div layout-gt-sm="row">
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <input ng-model="contact.nom" placeholder="Nom">
-                        </md-input-container>
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <input ng-model="contact.prenom" placeholder="Prénom">
-                        </md-input-container>
-                    </div>
-
-                    <div layout-gt-sm="row">
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <input ng-model="contact.entreprise" placeholder="Entreprise">
-                        </md-input-container>
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <input ng-model="contact.fonction" placeholder="Fonction">
-                        </md-input-container>
-                    </div>
-
-                    <div layout-gt-sm="row">
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <md-icon md-svg-src="communication:ic_email_24px" class="email"></md-icon>
-                            <input ng-model="contact.email" type="email" placeholder="Email">
-                        </md-input-container>
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <md-icon md-svg-src="communication:ic_phone_24px"></md-icon>
-                            <input ng-model="contact.telephone" placeholder="Téléphone">
-                        </md-input-container>
-                    </div>
-
-                    <div layout-gt-sm="row" layout-align="end">
-                        <md-button class="md-raised md-primary" ng-click="enregistrer(contact)">Enregistrer</md-button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </md-content>
-    <md-content ng-show="error">
-        <div class="alert alert-danger">
+    <md-content>
+        <div class="alert alert-danger" ng-show="error">
             <p>{{error}}</p>
         </div>
-    </md-content>
-    <md-content ng-show="success">
-        <div class="alert alert-success">
+        <div class="alert alert-success" ng-show="success">
             <p>{{success}}</p>
         </div>
     </md-content>
@@ -61,11 +24,10 @@
             <md-subheader class="md-no-sticky">Liste des contacts</md-subheader>
             <md-list-item class="md-2-line" ng-repeat="contact in contacts track by $index">
                 <div layout="row" layout-align="space-between end">
-                    <h5>{{contact.nom}}</h5>
-                    <h5>{{contact.prenom}}</h5>
+                    <h5>{{contact.nom}} {{contact.prenom}}</h5>
                     <md-icon md-svg-src="action:ic_view_list_24px" ng-click="detailsContact(contact)"
                              aria-label="Détails" class="md-secondary md-hue-3"></md-icon>
-                    <md-icon md-svg-icon="action:ic_delete_24px" ng-click="deleteContact(contact)"
+                    <md-icon md-svg-icon="action:ic_delete_24px" ng-click="supprimer(contact)"
                              aria-label="Supprimer" class="md-secondary"></md-icon>
                 </div>
                 <md-divider ng-if="!$last"></md-divider>

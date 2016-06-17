@@ -1,0 +1,57 @@
+<md-content ng-cloak>
+    <form name="contactForm">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Ajouter un contact</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="annuler()">
+                    <md-icon md-svg-src="navigation:ic_close_24px" aria-label="Fermer"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div layout-gt-sm="column">
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <input ng-model="contact.nom" name="nom" required placeholder="Nom">
+                            <div ng-messages="contactForm.nom.$error">
+                                <div ng-message="required">Le nom est obligatoire</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <input ng-model="contact.prenom" name="prenom" required placeholder="Prénom">
+                            <div ng-messages="contactForm.prenom.$error">
+                                <div ng-message="required">Le prénom est obligatoire</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <input ng-model="contact.entreprise" placeholder="Entreprise">
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <input ng-model="contact.fonction" placeholder="Fonction">
+                        </md-input-container>
+                    </div>
+
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <md-icon md-svg-src="communication:ic_email_24px" class="email"></md-icon>
+                            <input ng-model="contact.email" type="email" placeholder="Email">
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <md-icon md-svg-src="communication:ic_phone_24px"></md-icon>
+                            <input ng-model="contact.telephone" placeholder="Téléphone">
+                        </md-input-container>
+                    </div>
+
+                    <div layout-gt-sm="row" layout-align="end">
+                        <md-button class="md-raised md-primary" ng-disabled="contactForm.$invalid" ng-click="enregistrer(contact)">Enregistrer</md-button>
+                    </div>
+                </div>
+            </div>
+        </md-dialog-content>
+    </form>
+</md-content>

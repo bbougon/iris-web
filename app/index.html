@@ -31,17 +31,21 @@
     <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 
 </head>
-<body ng-app="irisE2E">
-<ul class="menu">
-    <li><a href="#/contacts">Contacts</a></li>
-</ul>
+<body ng-app="iris">
 
+<div flex="90" layout="column" class="boxWithHeight" layout-padding>
+    <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab label="contacts">
+            <md-content class="md-padding">
+                <div layout="row" ng-view="contacts"></div>
+            </md-content>
+        </md-tab>
+    </md-tabs>
+</div>
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
 <![endif]-->
-
-<div layout="row" ng-view></div>
 
 <div>Angular seed app: v<span app-version></span></div>
 
