@@ -8,7 +8,7 @@
                 Ajouter un contact
             </md-tooltip>
             <md-icon md-svg-src="content:ic_add_box_24px" ng-click="formulaireAjout()"
-                     aria-label="Ajouter un contact" class="md-secondary md-hue-3" ></md-icon>
+                     aria-label="Ajouter un contact" class="md-secondary md-hue-3"></md-icon>
         </md-button>
     </md-content>
     <md-content>
@@ -25,10 +25,22 @@
             <md-list-item class="md-2-line" ng-repeat="contact in contacts track by $index">
                 <div layout="row" layout-align="space-between end">
                     <h5>{{contact.nom}} {{contact.prenom}}</h5>
-                    <md-icon md-svg-src="action:ic_view_list_24px" ng-click="detailsContact(contact)"
-                             aria-label="Détails" class="md-secondary md-hue-3"></md-icon>
-                    <md-icon md-svg-icon="action:ic_delete_24px" ng-click="supprimer(contact)"
-                             aria-label="Supprimer" class="md-secondary"></md-icon>
+                    <p>{{contact.contactEmail}}</p>
+                    <md-button class="md-fab md-mini iris-blue md-secondary">
+                        <md-icon md-svg-src="action:ic_view_list_24px" ng-click="detailsContact(contact)"
+                                 aria-label="Détails"></md-icon>
+                        <md-tooltip md-direction="bottom">
+                            Afficher {{contact.nom}} {{contact.prenom}}
+                        </md-tooltip>
+                    </md-button>
+
+                    <md-button class="md-fab md-mini iris-blue md-secondary md-hue-3">
+                        <md-icon md-svg-icon="action:ic_delete_24px" ng-click="supprimer(contact)"
+                                 aria-label="Supprimer"></md-icon>
+                        <md-tooltip md-direction="bottom">
+                            Supprimer {{contact.nom}} {{contact.prenom}}
+                        </md-tooltip>
+                    </md-button>
                 </div>
                 <md-divider ng-if="!$last"></md-divider>
             </md-list-item>

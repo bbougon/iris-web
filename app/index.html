@@ -33,37 +33,41 @@
 </head>
 <body ng-app="iris">
 
-<header id="header">
-    <section class="navbar navbar-inverse docs-navbar-primary ng-scope">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-9">
-                    <a class="brand navbar-brand logo" href="#">
-                        IRIS
-                    </a>
-                    <ul class="nav navbar-nav">
-                        <li class="divider-vertical"></li>
-                        <li><a href="#/contacts"><i class="icon-home icon-white"></i> Contacts</a></li>
-                        <li class="divider-vertical"></li>
-                    </ul>
+<div id="wrapper">
+    <header id="header">
+        <section class="navbar navbar-inverse docs-navbar-primary ng-scope">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <a class="brand navbar-brand logo" href="#">
+                            IRIS
+                        </a>
+                        <ul class="nav navbar-nav">
+                            <li class="divider-vertical"></li>
+                            <li><a href="#/contacts"><i class="icon-home icon-white"></i> Contacts</a></li>
+                            <li class="divider-vertical"></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+        </section>
+    </header>
+
+    <section>
+        <div flex="90" layout="column" class="boxWithHeight" layout-padding>
+            <div layout="row" ng-view=""></div>
         </div>
     </section>
-</header>
 
-<section>
-    <div flex="90" layout="column" class="boxWithHeight" layout-padding>
-        <div layout="row" ng-view=""></div>
-    </div>
-</section>
+    <footer class="footer">
+        <div class="container" ng-controller="ScrollController">
+            <p class="pull-right"><a ng-click="backToTop()">Retour</a></p>
+            <p>IRIS - version <span app-version></span></p>
+        </div>
+    </footer>
+</div>
 
-<footer class="footer">
-    <div class="container" ng-controller="ScrollController">
-        <p class="pull-right"><a ng-click="backToTop()">Retour</a></p>
-        <p>IRIS - version <span app-version></span></p>
-    </div>
-</footer>
+
 
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
