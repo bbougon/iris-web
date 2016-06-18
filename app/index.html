@@ -33,21 +33,43 @@
 </head>
 <body ng-app="iris">
 
-<div flex="90" layout="column" class="boxWithHeight" layout-padding>
-    <md-tabs md-dynamic-height md-border-bottom>
-        <md-tab label="contacts">
-            <md-content class="md-padding">
-                <div layout="row" ng-view="contacts"></div>
-            </md-content>
-        </md-tab>
-    </md-tabs>
-</div>
+<header id="header">
+    <section class="navbar navbar-inverse docs-navbar-primary ng-scope">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <a class="brand navbar-brand logo" href="#">
+                        IRIS
+                    </a>
+                    <ul class="nav navbar-nav">
+                        <li class="divider-vertical"></li>
+                        <li><a href="#/contacts"><i class="icon-home icon-white"></i> Contacts</a></li>
+                        <li class="divider-vertical"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</header>
+
+<section>
+    <div flex="90" layout="column" class="boxWithHeight" layout-padding>
+        <div layout="row" ng-view=""></div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container" ng-controller="ScrollController">
+        <p class="pull-right"><a ng-click="backToTop()">Retour</a></p>
+        <p>IRIS - version <span app-version></span></p>
+    </div>
+</footer>
+
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<div>Angular seed app: v<span app-version></span></div>
 
 <!-- In production use:
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
@@ -60,6 +82,7 @@
 <script src="components/version/version-directive.js"></script>
 <script src="components/version/interpolate-filter.js"></script>
 <script src="components/uuid/angular-uuid.js"></script>
+<script src="scroll-controller.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>

@@ -4,7 +4,8 @@
 angular.module('iris', [
         'ngRoute',
         'iris.contacts',
-        'iris.version'
+        'iris.version',
+        'scroll'
 
     ])
     .config(['$routeProvider', function ($routeProvider) {

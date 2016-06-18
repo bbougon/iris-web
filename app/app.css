@@ -1,5 +1,44 @@
 /* app css stylesheet */
 
+.logo {
+    letter-spacing: 8px;
+    width: 140px;
+    color: white;
+    font-weight: bold;
+}
+
+.footer {
+    position: inherit;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding-top: 2em;
+    background-color: #3F51B5;
+    color: white;
+    padding-bottom: 2em;
+    display: block;
+}
+
+.footer a {
+    color: white;
+}
+
+.footer a:hover {
+    color: white;
+}
+
+.navbar-inverse .navbar-brand {
+    color: white;
+}
+
+.navbar-inverse {
+    border-radius: 0px;
+    background-color: rgb(63, 81, 181);
+    background-image: linear-gradient(to bottom,#3F51B5 0,#3F51B5 20%);
+    border-color: rgb(63, 81, 181);
+}
+
 .menu {
     list-style: none;
     border-bottom: 0.1em solid black;
