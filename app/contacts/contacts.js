@@ -32,7 +32,7 @@ angular.module('iris.contacts', ['ngRoute', 'ngAnimate', 'ngMaterial', 'angular-
         };
 
         $scope.annuler = function () {
-            $mdDialog.hide();
+            $mdDialog.cancel();
         };
 
         $scope.getContacts = function () {
