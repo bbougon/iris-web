@@ -24,8 +24,10 @@
             <md-subheader class="md-no-sticky">Liste des contacts</md-subheader>
             <md-list-item class="md-2-line" ng-repeat="contact in contacts track by $index">
                 <div layout="row" layout-align="space-between end">
-                    <h5>{{contact.nom}} {{contact.prenom}}</h5>
-                    <p>{{contact.contactEmail}}</p>
+                    <div layout="column">
+                        <h5>{{contact.nom}} {{contact.prenom}}</h5>
+                        <p>{{contact.email}}</p>
+                    </div>
                     <md-button class="md-fab md-mini iris-blue md-secondary">
                         <md-icon md-svg-src="action:ic_view_list_24px" ng-click="detailsContact(contact)"
                                  aria-label="Détails"></md-icon>
