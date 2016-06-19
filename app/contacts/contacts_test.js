@@ -53,7 +53,7 @@ describe('iris.contacts module', function () {
             scope.enregistrer(contact);
             $httpBackend.flush();
 
-            expect(scope.contacts).not.toBeNull();
+            expect(scope.contacts).toBeDefined();
             console.log(scope.contacts);
             expect(scope.contacts[0].identifiant).not.toBeNull();
         }));

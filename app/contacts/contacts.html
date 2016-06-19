@@ -3,11 +3,11 @@
 
 <div flex="75" ng-controller="ContactsController" layout-padding>
     <md-content>
-        <md-button class="md-fab md-mini iris-blue">
+        <md-button class="md-fab md-mini iris-blue" ng-click="formulaireAjout()">
             <md-tooltip md-direction="bottom">
                 Ajouter un contact
             </md-tooltip>
-            <md-icon md-svg-src="content:ic_add_box_24px" ng-click="formulaireAjout()"
+            <md-icon md-svg-src="content:ic_add_box_24px"
                      aria-label="Ajouter un contact" class="md-secondary md-hue-3"></md-icon>
         </md-button>
     </md-content>
@@ -28,16 +28,16 @@
                         <h5>{{contact.nom}} {{contact.prenom}}</h5>
                         <p>{{contact.email}}</p>
                     </div>
-                    <md-button class="md-fab md-mini iris-blue md-secondary">
-                        <md-icon md-svg-src="action:ic_view_list_24px" ng-click="detailsContact(contact)"
+                    <md-button class="md-fab md-mini iris-blue md-secondary" ng-click="detailsContact(contact)">
+                        <md-icon md-svg-src="action:ic_view_list_24px"
                                  aria-label="Détails"></md-icon>
                         <md-tooltip md-direction="bottom">
                             Afficher {{contact.nom}} {{contact.prenom}}
                         </md-tooltip>
                     </md-button>
 
-                    <md-button class="md-fab md-mini iris-blue md-secondary md-hue-3">
-                        <md-icon md-svg-icon="action:ic_delete_24px" ng-click="supprimer(contact)"
+                    <md-button class="md-fab md-mini iris-blue md-secondary md-hue-3" ng-click="supprimer(contact)">
+                        <md-icon md-svg-icon="action:ic_delete_24px"
                                  aria-label="Supprimer"></md-icon>
                         <md-tooltip md-direction="bottom">
                             Supprimer {{contact.nom}} {{contact.prenom}}
