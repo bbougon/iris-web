@@ -4,7 +4,7 @@
             <div class="md-toolbar-tools">
                 <h2>Ajouter un contact</h2>
                 <span flex></span>
-                <md-button class="md-icon-button" ng-click="annuler()">
+                <md-button id="annuler" class="md-icon-button" ng-click="annuler()">
                     <md-icon md-svg-src="navigation:ic_close_24px" aria-label="Fermer"></md-icon>
                 </md-button>
             </div>
@@ -24,26 +24,6 @@
                             <div ng-messages="contactForm.prenom.$error">
                                 <div ng-message="required">Le prénom est obligatoire</div>
                             </div>
-                        </md-input-container>
-                    </div>
-
-                    <div layout-gt-sm="row">
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <input ng-model="contact.entreprise" placeholder="Entreprise">
-                        </md-input-container>
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <input ng-model="contact.fonction" placeholder="Fonction">
-                        </md-input-container>
-                    </div>
-
-                    <div layout-gt-sm="row">
-                        <md-input-container flex="65" class="md-block" flex-gt-sm>
-                            <md-icon md-svg-src="communication:ic_email_24px" class="email"></md-icon>
-                            <input ng-model="contact.email" type="email" placeholder="Email">
-                        </md-input-container>
-                        <md-input-container flex="35" class="md-block" flex-gt-sm>
-                            <md-icon md-svg-src="communication:ic_phone_24px"></md-icon>
-                            <input ng-model="contact.telephone" placeholder="Téléphone">
                         </md-input-container>
                     </div>
 

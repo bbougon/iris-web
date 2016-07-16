@@ -4,6 +4,7 @@
 angular.module('iris', [
         'ngRoute',
         'iris.contacts',
+        'iris.rappels',
         'iris.version',
         'scroll'
 

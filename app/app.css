@@ -43,43 +43,12 @@
 .navbar-inverse {
     border-radius: 0px;
     background-color: rgb(63, 81, 181);
-    background-image: linear-gradient(to bottom,#3F51B5 0,#3F51B5 20%);
+    background-image: linear-gradient(to bottom, #3F51B5 0, #3F51B5 20%);
     border-color: rgb(63, 81, 181);
 }
 
-.menu {
-    list-style: none;
-    border-bottom: 0.1em solid black;
-    margin-bottom: 2em;
-    padding: 0 0 0.5em;
-}
-
-.menu:before {
-    content: "[";
-}
-
-.menu:after {
-    content: "]";
-}
-
-.menu > li {
-    display: inline;
-}
-
-.menu > li:before {
-    content: "|";
-    padding-right: 0.3em;
-}
-
-.menu > li:nth-child(1):before {
-    content: "";
-    padding: 0;
-}
-
-.btn1 {
-    border-radius: 6px 6px 6px 6px;
-    font-size: 10px;
-    margin: 3px 0px 3px 0px;
+#popupContainer {
+    position: relative;
 }
 
 section[flex="100"] {
@@ -126,4 +95,12 @@ section[flex="100"] {
 
 .md-button.md-fab.iris-blue:not([disabled]):hover {
     background-color: rgb(63, 81, 181);
+}
+
+.iris-container {
+    margin-bottom: 0px;
+}
+
+.iris-container .iris-sans-entete {
+    margin-top: 0px;
 }

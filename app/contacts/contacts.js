@@ -11,7 +11,15 @@ angular.module('iris.contacts', ['ngRoute', 'ngAnimate', 'ngMaterial', 'angular-
 
     .controller('ContactsController', ['$scope', '$mdDialog', '$timeout', '$mdMedia', 'uuid', 'contactService', function ($scope, $mdDialog, $timeout, $mdMedia, uuid, contactService) {
         $scope.contacts = [];
+        $scope.typesNumeroTelephone = ["PRINCIPAL", "PROFESSIONNEL", "PERSONNEL", "MOBILE"]
 
+        $scope.ajouterTelephone = function(contact, telephone) {
+            if(contact.telephones == undefined) {
+                contact.telephones = new Array();
+            }
+            contact.telephones.push(telephone);
+            $scope.contacts.push(contact);
+        };
 
         $scope.formulaireAjout = function () {
             $mdDialog.show({
@@ -32,26 +40,32 @@ angular.module('iris.contacts', ['ngRoute', 'ngAnimate', 'ngMaterial', 'angular-
 
         $scope.detailsContact = function (contact) {
             var copieContact = {};
-            angular.copy(contact, copieContact),
-                $mdDialog.show({
-                        locals: {
-                            contact: copieContact
-                        },
-                        controller: 'ContactsController',
-                        controllerAs: 'contactsController',
-                        templateUrl: 'contacts/details-contact.tmpl.html',
-                        parent: angular.element(document.body),
-                        clickOutsideToClose: true,
-                        bindToController: true,
-                        fullscreen: true
-                    })
-                    .then(function (contactModifie) {
-                        $scope.contacts.splice($scope.contacts.indexOf(contact), 1, contactModifie);
-                        $scope.success = "Modification de " + contactModifie.nom + " " + contactModifie.prenom + " effectuée.";
-                        $timeout(function () {
-                            $scope.success = false;
-                        }, 4000);
-                    });
+            var copieTypeNumeroTelephone = [];
+            var telephoneAAjouter = {};
+            angular.copy(contact, copieContact);
+            angular.copy($scope.typesNumeroTelephone, copieTypeNumeroTelephone);
+            $mdDialog.show({
+                    locals: {
+                        contact: copieContact,
+                        typesNumeroTelephone: copieTypeNumeroTelephone,
+                        telephoneAAjouter: telephoneAAjouter
+                    },
+                    controller: 'ContactsController',
+                    controllerAs: 'contactsController',
+                    templateUrl: 'contacts/details-contact.tmpl.html',
+                    parent: angular.element(document.body),
+                    disableParentScroll: false,
+                    clickOutsideToClose: true,
+                    bindToController: true,
+                    fullscreen: false
+                })
+                .then(function (contactModifie) {
+                    $scope.contacts.splice($scope.contacts.indexOf(contact), 1, contactModifie);
+                    $scope.success = "Modification de " + contactModifie.nom + " " + contactModifie.prenom + " effectuée.";
+                    $timeout(function () {
+                        $scope.success = false;
+                    }, 4000);
+                });
         };
 
         $scope.annuler = function () {
@@ -97,9 +111,12 @@ angular.module('iris.contacts', ['ngRoute', 'ngAnimate', 'ngMaterial', 'angular-
 
         };
 
-        $scope.enregistrer = function (contact) {
+        $scope.enregistrer = function (contact, telephone) {
             if (!contact.identifiant) {
                 contact.identifiant = uuid.v4();
+            }
+            if(telephone) {
+                $scope.ajouterTelephone(contact, telephone);
             }
             contactService.enregistrer(contact)
                 .then(function () {

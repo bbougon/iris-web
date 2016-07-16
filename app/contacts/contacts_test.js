@@ -59,4 +59,19 @@ describe('iris.contacts module', function () {
         }));
 
     });
+
+    describe('contact methods', function () {
+        it('devrait ajouter un téléphone au contact', inject(function ($controller) {
+            var $scope = {};
+            var telephone = {numero: '0666666666', type: 'PERSONNEL'};
+            var contact = {nom: "Bougon", prenom: "Bertrand"};
+
+            $controller('ContactsController', {$scope: $scope, contactsService: service});
+            $scope.ajouterTelephone(contact, telephone)
+
+            expect($scope.contacts).not.toBeNull();
+            expect($scope.contacts[0].telephones[0].numero).toEqual("0666666666");
+            expect($scope.contacts[0].telephones[0].type).toEqual("PERSONNEL");
+        }));
+    });
 });
